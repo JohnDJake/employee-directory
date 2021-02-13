@@ -15,8 +15,11 @@ export default class EmployeeTable extends Component {
                 <thead>
                     <tr>
                         <th scope="col">Picture</th>
-                        <th scope="col">Name</th>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                        <th scope="col">Location</th>
                         <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
                         <th scope="col">Birthday</th>
                     </tr>
                 </thead>
