@@ -9,7 +9,7 @@ export default function EmployeeRow({ employee }) {
             <td>{employee.location.city}, {employee.location.state}, {employee.location.country}</td>
             <td>{employee.email}</td>
             <td>{employee.phone}</td>
-            <td>{(new Date(employee.dob.date)).toLocaleDateString()}</td>
+            <td>{employee.dob.date.toLocaleDateString()}</td>
         </tr>
     );
 }

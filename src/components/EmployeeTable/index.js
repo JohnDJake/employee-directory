@@ -5,22 +5,29 @@ import EmployeeRow from '../EmployeeRow';
 const sorts = {
     // standard ascending sort
     ascending: (a, b) => {
+        console.log(a, b, a > b);
         if (a > b) return 1;
         if (b > a) return -1;
         return 0;
     },
-    
+
     // ascending sort using name.first
     firstNameAscending: (a, b) => sorts.ascending(a.name.first, b.name.first),
 
     // descending sort by multiplying ascending by -1
     firstNameDescending: (a, b) => sorts.firstNameAscending(a, b) * -1,
-    
+
     // ascending sort using name.last
     lastNameAscending: (a, b) => sorts.ascending(a.name.last, b.name.last),
-    
+
     // descending sort by multiplying ascending by -1
-    lastNameDescending: (a, b) => sorts.lastNameAscending(a, b) * -1
+    lastNameDescending: (a, b) => sorts.lastNameAscending(a, b) * -1,
+
+    // ascending sort using dob
+    dobAscending: (a, b) => sorts.ascending(a.dob.date, b.dob.date),
+
+    // descending sort by multiplying ascending by -1
+    dobDescending: (a, b) => sorts.dobAscending(a, b) * -1
 }
 
 export default class EmployeeTable extends Component {
@@ -28,7 +35,14 @@ export default class EmployeeTable extends Component {
 
     // get generated employees
     componentDidMount() {
-        API.generate(100).then(({ data: { results } }) => this.setState({ employees: results }));
+        API.generate(100).then(({ data: { results } }) => {
+            // copy results array and replace each date string with a date object
+            const employees = [...results];
+            employees.forEach(employee => {
+                employee.dob.date = new Date(employee.dob.date);
+            });
+            return this.setState({ employees });
+        });
     }
 
     // update the sort state
@@ -50,7 +64,7 @@ export default class EmployeeTable extends Component {
                         <th scope="col">Location</th>
                         <th scope="col">Email</th>
                         <th scope="col">Phone</th>
-                        <th scope="col">DOB</th>
+                        <th scope="col" onClick={() => this.changeSort("dob")}>DOB</th>
                     </tr>
                 </thead>
                 <tbody>
