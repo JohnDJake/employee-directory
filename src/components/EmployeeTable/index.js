@@ -68,7 +68,7 @@ export default class EmployeeTable extends Component {
     }
 
     // update the sort state
-    changeSort(sortBy) {
+    changeSort = (sortBy) => {
         // if updating with the current sort method, flip between ascending and descending
         if (this.state.sort === sortBy) this.setState({ sortDirection: this.state.sortDirection === "Ascending" ? "Descending" : "Ascending" });
         // otherwise switch to the new sort, ascending
