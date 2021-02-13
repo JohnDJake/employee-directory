@@ -22,6 +22,23 @@ const sorts = {
     // descending sort by multiplying ascending by -1
     lastNameDescending: (a, b) => sorts.lastNameAscending(a, b) * -1,
 
+    // ascending sort by country, state, city
+    locationAscending: ({location: a}, {location: b}) => {
+        if (a.country > b.country) return 1;
+        if (b.country > a.country) return -1;
+        // compare country must be 0 so check state
+        if (a.state > b.state) return 1;
+        if (b.state > a.state) return -1;
+        // compare state must also be 0 so check city
+        if (a.city > b.city) return 1;
+        if (b.city > a.city) return -1;
+        // same city, state, country
+        return 0;
+    },
+    
+    // descending sort by multiplying ascending by -1
+    locationDescending: (a, b) => sorts.locationAscending(a, b) * -1,
+    
     // ascending sort using dob
     dobAscending: (a, b) => sorts.ascending(a.dob.date, b.dob.date),
 
@@ -60,7 +77,7 @@ export default class EmployeeTable extends Component {
                         <th scope="col">Picture</th>
                         <th scope="col" onClick={() => this.changeSort("firstName")}>First Name</th>
                         <th scope="col" onClick={() => this.changeSort("lastName")}>Last Name</th>
-                        <th scope="col">Location</th>
+                        <th scope="col" onClick={() => this.changeSort("location")}>Location</th>
                         <th scope="col">Email</th>
                         <th scope="col">Phone</th>
                         <th scope="col" onClick={() => this.changeSort("dob")}>DOB</th>
