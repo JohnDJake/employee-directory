@@ -9,9 +9,21 @@ const sorts = {
         return 0;
     },
 
+    byFirstNameDescending: (a, b) => {
+        if (a.name.first < b.name.first) return 1;
+        if (a.name.first > b.name.first) return -1;
+        return 0;
+    },
+
     byLastNameAscending: (a, b) => {
         if (a.name.last > b.name.last) return 1;
         if (a.name.last < b.name.last) return -1;
+        return 0;
+    },
+
+    byLastNameDescending: (a, b) => {
+        if (a.name.last < b.name.last) return 1;
+        if (a.name.last > b.name.last) return -1;
         return 0;
     }
 }
