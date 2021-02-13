@@ -23,7 +23,7 @@ const sorts = {
     lastNameDescending: (a, b) => sorts.lastNameAscending(a, b) * -1,
 
     // ascending sort by country, state, city
-    locationAscending: ({location: a}, {location: b}) => {
+    locationAscending: ({ location: a }, { location: b }) => {
         if (a.country > b.country) return 1;
         if (b.country > a.country) return -1;
         // compare country must be 0 so check state
@@ -35,10 +35,10 @@ const sorts = {
         // same city, state, country
         return 0;
     },
-    
+
     // descending sort by multiplying ascending by -1
     locationDescending: (a, b) => sorts.locationAscending(a, b) * -1,
-    
+
     // ascending sort using dob
     dobAscending: (a, b) => sorts.ascending(a.dob.date, b.dob.date),
 
@@ -47,7 +47,12 @@ const sorts = {
 }
 
 export default class EmployeeTable extends Component {
-    state = { employees: [] };
+    state = {
+        employees: [],
+        firstName: "",
+        lastName: "",
+        location: ""
+    };
 
     // get generated employees
     componentDidMount() {
@@ -69,6 +74,11 @@ export default class EmployeeTable extends Component {
         else this.setState({ sort: sortBy, sortDirection: "Ascending" });
     }
 
+    // handle input change for filter inputs
+    handleInputChange = ({ target: { name, value } }) => {
+        this.setState({ [name]: value });
+    }
+
     render() {
         return (
             <table className="table">
@@ -83,8 +93,23 @@ export default class EmployeeTable extends Component {
                         <th scope="col" onClick={() => this.changeSort("dob")}>DOB</th>
                     </tr>
                 </thead>
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"><input value={this.state.firstName} name="firstName" onChange={this.handleInputChange} /></th>
+                        <th scope="col"><input value={this.state.lastName} name="lastName" onChange={this.handleInputChange} /></th>
+                        <th scope="col"><input value={this.state.location} name="location" onChange={this.handleInputChange} /></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
                 <tbody>
-                    {this.state.employees.sort(sorts[this.state.sort + this.state.sortDirection]).map(employee => <EmployeeRow key={employee.login.uuid} employee={employee} />)}
+                    {this.state.employees
+                        .filter(employee => employee.name.first.toLowerCase().includes(this.state.firstName.toLowerCase()) &&
+                            employee.name.last.toLowerCase().includes(this.state.lastName.toLowerCase()) &&
+                            `${employee.location.country}${employee.location.state}${employee.location.city}`.toLowerCase().includes(this.state.location.toLowerCase()))
+                        .sort(sorts[this.state.sort + this.state.sortDirection]).map(employee => <EmployeeRow key={employee.login.uuid} employee={employee} />)}
 
                 </tbody>
             </table>
