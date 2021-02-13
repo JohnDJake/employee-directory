@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import API from '../../utils/API';
 import EmployeeRow from '../EmployeeRow';
+import './style.css';
 
 const sorts = {
     // standard ascending sort
@@ -81,16 +82,16 @@ export default class EmployeeTable extends Component {
 
     render() {
         return (
-            <table className="table">
+            <table className="table EmployeeTable">
                 <thead>
                     <tr>
                         <th scope="col">Picture</th>
-                        <th scope="col" onClick={() => this.changeSort("firstName")}>First Name</th>
-                        <th scope="col" onClick={() => this.changeSort("lastName")}>Last Name</th>
-                        <th scope="col" onClick={() => this.changeSort("location")}>Location</th>
+                        <th scope="col" className="sortable" onClick={() => this.changeSort("firstName")}>First Name</th>
+                        <th scope="col" className="sortable" onClick={() => this.changeSort("lastName")}>Last Name</th>
+                        <th scope="col" className="sortable" onClick={() => this.changeSort("location")}>Location</th>
                         <th scope="col">Email</th>
                         <th scope="col">Phone</th>
-                        <th scope="col" onClick={() => this.changeSort("dob")}>DOB</th>
+                        <th scope="col" className="sortable" onClick={() => this.changeSort("dob")}>DOB</th>
                     </tr>
                 </thead>
                 <thead>

@@ -1,0 +1,4 @@
+.EmployeeTable th.sortable {
+    text-decoration: underline;
+    cursor: pointer;
+}
