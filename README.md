@@ -32,6 +32,8 @@ To run a local copy of the application, run `npm start`.
 
 Click on any of the underlined table headers to sort by that column. Click again to switch between ascending and descending. Type in any of the input fields to filter that column.
 
+![Demo gif](demo.gif)
+
 
 
 ## Contributing
