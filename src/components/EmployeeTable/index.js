@@ -21,7 +21,7 @@ export default class EmployeeTable extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {this.state.employees.map(employee => <EmployeeRow key={employee.id.value} employee={employee} />)}
+                    {this.state.employees.map(employee => <EmployeeRow employee={employee} />)}
 
                 </tbody>
             </table>
