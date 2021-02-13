@@ -1,7 +1,5 @@
 import React from 'react'
 
-const dateFormat = new Intl.DateTimeFormat('en-US', { month: "long", day: "numeric" });
-
 export default function EmployeeRow({ employee }) {
     return (
         <tr>
@@ -11,7 +9,7 @@ export default function EmployeeRow({ employee }) {
             <td>{employee.location.city}, {employee.location.state}, {employee.location.country}</td>
             <td>{employee.email}</td>
             <td>{employee.phone}</td>
-            <td>{dateFormat.format(new Date(employee.dob.date))}</td>
+            <td>{(new Date(employee.dob.date)).toLocaleDateString()}</td>
         </tr>
     );
 }

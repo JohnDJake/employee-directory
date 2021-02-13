@@ -20,7 +20,7 @@ export default class EmployeeTable extends Component {
                         <th scope="col">Location</th>
                         <th scope="col">Email</th>
                         <th scope="col">Phone</th>
-                        <th scope="col">Birthday</th>
+                        <th scope="col">DOB</th>
                     </tr>
                 </thead>
                 <tbody>
