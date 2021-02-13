@@ -3,27 +3,17 @@ import API from '../../utils/API';
 import EmployeeRow from '../EmployeeRow';
 
 const sorts = {
-    firstNameAscending: (a, b) => {
-        if (a.name.first > b.name.first) return 1;
-        if (a.name.first < b.name.first) return -1;
-        return 0;
-    },
+    firstNameAscending: (a, b) => sorts.ascending(a.name.first, b.name.first),
 
-    firstNameDescending: (a, b) => {
-        if (a.name.first < b.name.first) return 1;
-        if (a.name.first > b.name.first) return -1;
-        return 0;
-    },
+    firstNameDescending: (a, b) => sorts.firstNameAscending(a, b) * -1,
 
-    lastNameAscending: (a, b) => {
-        if (a.name.last > b.name.last) return 1;
-        if (a.name.last < b.name.last) return -1;
-        return 0;
-    },
+    lastNameAscending: (a, b) => sorts.ascending(a.name.last, b.name.last),
 
-    lastNameDescending: (a, b) => {
-        if (a.name.last < b.name.last) return 1;
-        if (a.name.last > b.name.last) return -1;
+    lastNameDescending: (a, b) => sorts.lastNameAscending(a, b) * -1,
+
+    ascending: (a, b) => {
+        if (a > b) return 1;
+        if (b > a) return -1;
         return 0;
     }
 }
