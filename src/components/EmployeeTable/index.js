@@ -5,7 +5,6 @@ import EmployeeRow from '../EmployeeRow';
 const sorts = {
     // standard ascending sort
     ascending: (a, b) => {
-        console.log(a, b, a > b);
         if (a > b) return 1;
         if (b > a) return -1;
         return 0;
